@@ -1,0 +1,195 @@
+// Justin Tan
+// October 16, 2018
+// Professor Pham
+// Programming Challenge 19: Order Status, Gaddis' text: page 454
+// This program creates a two dimensional array with test data and calculates the total, average, row and column totals, and the highest and lowest in the row.
+
+#include "pch.h"
+#include <iostream>
+using namespace std;
+
+// Constants for the array sizes
+const int ROWS = 4;
+const int COLS = 5;
+
+// Function prototypes
+int getTotal(int[][COLS], int, int);
+double getAverage(int[][COLS], int, int);
+int getRowTotal(int[][COLS], int, int);
+int getColumnTotal(int[][COLS], int, int);
+int getHighestInRow(int[][COLS], int, int);
+int getLowestInRow(int[][COLS], int, int);
+
+int main()
+{
+	// Array with test data
+	int testArray[ROWS][COLS] = 
+	{
+	{ 1, 2, 3, 4, 5 },
+	{ 6, 7, 8, 9, 10 },
+	{ 11, 12, 13, 14, 15 },
+	{ 16, 17, 18, 19, 20 }
+	};
+
+	// Display the total of the array elements.
+	cout << "--------------------------------------" << endl;
+	cout << "The total of the array elements is " << getTotal(testArray, ROWS, COLS) << endl;
+	cout << "--------------------------------------" << endl;
+
+	// Display the average of the array elements.
+	cout << "---------------------------------------" << endl;
+	cout << "The average value of an element is " << getAverage(testArray, ROWS, COLS) << endl;
+	cout << "---------------------------------------" << endl;
+
+	// Display the total of row 0 to row 3 (4 rows in total).
+	cout << "Row Totals" << endl;
+	cout << "------------------------" << endl;
+	cout << "The total of row 0 is " << getRowTotal(testArray, 0 ,COLS) << endl;
+	cout << "The total of row 1 is " << getRowTotal(testArray, 1, COLS) << endl;
+	cout << "The total of row 2 is " << getRowTotal(testArray, 2, COLS) << endl;
+	cout << "The total of row 3 is " << getRowTotal(testArray, 3, COLS) << endl;
+
+	// Display the total of column 0 to column 5 (each row has 5 columns).
+	cout << "------------------------" << endl;
+	cout << "Column Totals" << endl;
+	cout << "------------------------" << endl;
+	cout << "The total of col 0 is " << getColumnTotal(testArray, 0, ROWS) << endl;
+	cout << "The total of col 1 is " << getColumnTotal(testArray, 1, ROWS) << endl;
+	cout << "The total of col 2 is " << getColumnTotal(testArray, 2, ROWS) << endl;
+	cout << "The total of col 3 is " << getColumnTotal(testArray, 3, ROWS) << endl;
+	cout << "The total of col 4 is " << getColumnTotal(testArray, 4, ROWS) << endl;
+
+	// Display the highest value in each row.
+	cout << "-------------------------" << endl;
+	cout << "Highest value in each row" << endl;
+	cout << "--------------------------------" << endl;
+	cout << "The highest value in row 0 is " << getHighestInRow(testArray, 0, COLS) << endl;
+	cout << "The highest value in row 1 is " << getHighestInRow(testArray, 1, COLS) << endl;
+	cout << "The highest value in row 2 is " << getHighestInRow(testArray, 2, COLS) << endl;
+	cout << "The highest value in row 3 is " << getHighestInRow(testArray, 3, COLS) << endl;
+	cout << "--------------------------------" << endl;
+
+	// Display the lowest value in each row.
+	cout << "Lowest value in each row" << endl;
+	cout << "--------------------------------" << endl;
+	cout << "The lowest value in row 0 is " << getLowestInRow(testArray, 0, COLS) << endl;
+	cout << "The lowest value in row 1 is " << getLowestInRow(testArray, 1, COLS) << endl;
+	cout << "The lowest value in row 2 is " << getLowestInRow(testArray, 2, COLS) << endl;
+	cout << "The lowest value in row 3 is " << getLowestInRow(testArray, 3, COLS) << endl;
+	cout << "--------------------------------" << endl;
+
+	return 0;
+}
+
+// ********************************************************
+// The getTotal function returns the total of all *
+// the elements in the array. *
+// ********************************************************
+int getTotal(int array[][COLS], int rows, int cols)
+{
+	int total = 0;
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			total += array[i][j];
+		}
+	}
+	return total;
+}
+
+// ********************************************************
+// The getAverage function returns the averave value *
+// of the elements in the array. *
+// ********************************************************
+double getAverage(int array[][COLS], int rows, int cols)
+{
+	// Calculate the number of elements in the array.
+	int total = 0;
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			total += array[i][j];
+		}
+	}
+
+	// Use a double so we can avoid integer division
+	// later.
+	double numElements = rows * cols;
+
+	// Get the average of the elements.
+	double average;
+	average = (total / numElements);
+
+	// Return the average.
+	return average;
+}
+
+// ********************************************************
+// The getRowTotal function returns the total of the *
+// the elements in the specified row of the array. *
+// ********************************************************
+int getRowTotal(int array[][COLS], int rowToTotal, int cols)
+{
+	int total = 0;
+	for (int i = 0; i < cols; i++)
+	{
+		total += array[rowToTotal][i];
+	}
+
+
+	return total;
+}
+
+// ********************************************************
+// The getColTotal function returns the total of the *
+// the elements in the specified column of the array. *
+// ********************************************************
+int getColumnTotal(int array[][COLS], int colToTotal, int rows)
+{
+	int total = 0;
+	for (int i = 0; i < rows; i++)
+	{
+		total += array[i][colToTotal];
+	}
+
+	return total;
+
+}
+
+// ********************************************************
+// The getHighestInRow function returns the highest *
+// value in the specified row. *
+// ********************************************************
+int getHighestInRow(int array[][COLS], int rowToSearch, int cols)
+{
+	int highest = array[rowToSearch][0];
+	for (int i = 0; i < cols; i++)
+	{
+		if (array[rowToSearch][i] > highest)
+		{
+			highest = array[rowToSearch][i];
+		}
+	}
+	
+	return highest;
+}
+
+// ********************************************************
+// The getLowestInRow function returns the lowest *
+// value in the specified row. *
+// ********************************************************
+int getLowestInRow(int array[][COLS], int rowToSearch, int cols)
+{
+	int lowest = array[rowToSearch][0];
+	for (int i = 0; i < cols; i++)
+	{
+		if (array[rowToSearch][i] < lowest)
+		{
+			lowest = array[rowToSearch][i];
+		}
+	}
+
+	return lowest;
+}
