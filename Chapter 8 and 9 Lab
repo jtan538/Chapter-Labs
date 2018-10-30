@@ -3,12 +3,13 @@
 // Professor Pham
 // Chapter 8 and 9 Lab
 // This program 
+
 #include "pch.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;
 
-
+// Place your name here
 
 // Function prototypes
 void sort(double*, int);
@@ -25,14 +26,13 @@ int main()
 	cin >> numTestScores;
 
 	// TODO: Allocate an array to hold the test scores.
-	pointer = new double[numTestScores];
+	pointer = new double [numTestScores];
 
 	// TODO: Get the test scores (i.e user enters numTestScores into pointer)
-	cout << "Enter the test scores below.\n";
 	for (int i = 0; i < numTestScores; i++)
 	{
 		cout << "Test Score " << (i + 1) << ": ";
-		cin >> pointer[i];
+		cin >> *(pointer + i);
 	}
 
 	// TODO: Sort the test scores.
@@ -42,13 +42,18 @@ int main()
 	testAverage = averageDropLowest(pointer, numTestScores);
 
 	// TODO: Display the resulting data and average score
+	cout << "\nTest scores\n";
+	cout << "Number of scores: " << numTestScores << endl;
+	cout << "Scores in ascending-order:\n";
+	for (int i = 0; i < numTestScores; i++)
+	{
+		cout << "#" << (i + 1) << ": " << *(pointer + i) << endl;
+	}
 	cout << fixed << showpoint << setprecision(2);
-	cout << "Average score is: " << testAverage << endl;
+	cout << "Average score: " << testAverage << endl;
 
 	// TODO: Free the dynamically-allocated memory.
-	delete pointer;
-	pointer = 0;
-
+	delete [] pointer; 
 	return 0;
 }
 
@@ -60,24 +65,28 @@ int main()
 void sort(double* score, int size)
 {
 	// TODO: Selection sort of score
-	int startScan, minIndex;
-	double minValue; 
-
-	for (startScan = 0; startScan < (size - 1); startScan++)
 	{
-		minIndex = startScan;
-		minValue = *(score + startScan);
-		for (int i = startScan + 1; i < size; i++)
+		// TODO: Selection sort of score
+		int startScan, minIndex;
+		double minValue;
+
+		for (startScan = 0; startScan < (size - 1); startScan++)
 		{
-			if (*(score + i) < minValue)
+			minIndex = startScan;
+			minValue = *(score + startScan);
+			for (int i = startScan + 1; i < size; i++)
 			{
-				minValue = *(score + i);
-				minIndex = i;
+				if (*(score + i) < minValue)
+				{
+					minValue = *(score + i);
+					minIndex = i;
+				}
 			}
 		}
+		*(score + minIndex) = *(score + startScan);
+		*(score + startScan) = minValue;
 	}
-	*(score + minIndex) = *(score + startScan);
-	*(score + startScan) = minValue;
+
 }
 
 // ********************************************************
@@ -94,7 +103,10 @@ double averageDropLowest(double* score, int numScores)
 	double average = 0;
 
 	// TODO: calculate and return the average of the values
-	average = *score / numScores;
+	for (int i = 0; i < numScores; i++)
+	{
+		average += *(score + i) / numScores;
+	}
 
 	return average; // Remember that you dropped one.
 }
