@@ -1,0 +1,162 @@
+// Justin Tan
+// 20 October 2018
+// Chapter 13, Programming Challenge 2: Employee Class
+// This program stores data into three objects and displays the data of each employee using an Employee class.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Employee Class Declaration
+
+class Employee
+{
+private:
+    string name;     // To hold the employee's name
+    int idNumber;    // To hold the employee's ID number
+    string department;   // To hold the name of the department
+    string position; // To hold the employee's job title
+    
+public:
+    // Constructors
+    Employee(string, int, string, string);
+    Employee(string, int);
+    Employee();
+    
+    // Mutators
+    void setName(string n);
+    void setID(int id);
+    void setDepartment(string d);
+    void setPosition(string p);
+    
+    // Accessors
+    string getName();
+    int getID();
+    string getDepartment();
+    string getPosition();
+};
+
+// Constructor #1
+Employee::Employee(string n, int id, string d, string p)
+{
+    
+    setName(n);
+    setID(id);
+    setDepartment(d);
+    setPosition(p);
+}
+
+// Constructor #2
+Employee::Employee(string n, int id)
+{
+    
+    setName(n);
+    setID(id);
+    setDepartment("");
+    setPosition("");
+}
+
+// Constructor #3, default constructor
+Employee::Employee()
+{
+    
+    setName("");
+    setID(0);
+    setDepartment("");
+    setPosition("");
+}
+
+// Member function setName
+
+void Employee::setName(string n)
+{
+    name = n;
+}
+
+// Member function setID
+
+void Employee::setID(int id)
+{
+    idNumber = id;
+}
+
+// Member function setDepartment
+
+
+void Employee::setDepartment(string d)
+{
+    department = d;
+}
+
+// Member function setPosition
+
+void Employee::setPosition(string p)
+{
+    position = p;
+}
+
+// Member function getName
+
+string Employee::getName()
+{
+    return name;
+}
+
+// Member function getID
+
+int Employee::getID()
+{
+    return idNumber;
+}
+
+// Member function getDepartment
+
+string Employee::getDepartment()
+{
+    return department;
+}
+
+// Member function getPosition
+
+string Employee::getPosition()
+{
+    return position;
+}
+
+// Function prototype
+void displayEmployee(Employee);
+
+// Driver program to demonstrate the class
+int main()
+{
+    // TODO: Create an Employee object to test constructor obj #1.
+    Employee Susan("Susan Meyers", 47899, "Accounting" , "Vice President");
+    
+    // TODO: Create an Employee object to test constructor obj #2.
+    Employee Mark("Mark Jones", 39119, "IT", "Programmer");
+    
+    // TODO: Create an Employee object to test constructor obj #3.
+    Employee Joy("Joy Rogers" , 81774, "Manufacturing", "Engineer");
+    
+    // Display each employee's data.
+    displayEmployee(Susan);
+    displayEmployee(Mark);
+    displayEmployee(Joy);
+    
+    return 0;
+}
+
+//**************************************************
+// The displayEmployee function displays the data *
+// in the Employee object passed as an argument. *
+//**************************************************
+
+void displayEmployee(Employee e)
+{
+    cout << "-----------------------------" << endl;
+    cout << "Name: " << e.getName() << endl;
+    cout << "ID: " << e.getID() << endl;
+    cout << "Department: " << e.getDepartment() << endl;
+    cout << "Position: " << e.getPosition() << endl;
+    
+}
